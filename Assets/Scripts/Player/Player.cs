@@ -1,18 +1,42 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Player : MonoBehaviour
+namespace Scripts
 {
-    // Start is called before the first frame update
-    void Start()
+    public class Player : MonoBehaviour
     {
-        
-    }
+        //* Class variables
+        private Rigidbody _rb = default;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        //* Movement Strategy variables
+        private MovementStrategy _currMovement = default;
+        private FlyBehaviour _flightMovement = default;
+
+        //* Input system variables
+        private PlayerController _playerController = default;
+
+        //* Class properties
+        public Rigidbody Rb { get => _rb; }
+
+        /// <summary>
+        /// Awake is called when the script instance is being loaded.
+        /// </summary>
+        private void Awake()
+        {
+            _rb = GetComponent<Rigidbody>();
+            _rb.isKinematic = true;
+
+            _flightMovement = new FlyBehaviour();
+
+            _currMovement = _flightMovement;
+
+        }
+
+        /// <summary>
+        /// This function is called every fixed framerate frame, if the MonoBehaviour is enabled.
+        /// </summary>
+        private void FixedUpdate()
+        {
+            _currMovement.Movement(this);
+        }
     }
 }
