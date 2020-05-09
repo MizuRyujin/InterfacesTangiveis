@@ -10,17 +10,9 @@ namespace Scripts
             RotateToInput(player);
             RotateModel(player);
         }
-
-        private void AlwaysForward(Player player)
+        
+        public override void RotateToInput(Player player)
         {
-            player.Rb.MovePosition(
-                player.transform.position + player.transform.forward *
-                player.Values.FlightSpeed * Time.deltaTime);
-        }
-
-        private void RotateToInput(Player player)
-        {
-            //! THIS TYPE OF ROTATION DOESN'T CONSIDER IF PLAYER IS LATERAL
             if (player.MovementInput != Vector2.zero)
             {
                 _movement += new Vector3(
@@ -32,6 +24,14 @@ namespace Scripts
             player.Rb.MoveRotation(Quaternion.Euler(_movement));
         }
 
+        private void AlwaysForward(Player player)
+        {
+            player.Rb.MovePosition(
+                player.transform.position + player.transform.forward *
+                player.Values.FlightSpeed * Time.deltaTime);
+        }
+
+
         private void RotateModel(Player player)
         {
             if (player.MovementInput != Vector2.zero)
@@ -40,12 +40,10 @@ namespace Scripts
                 {
                     ModelRotAnim(player, 0.0f, 60.0f);
                 }
-
                 if (player.MovementInput.x > 0.0f)
                 {
                     ModelRotAnim(player, 0.0f, -60.0f);
                 }
-
                 if (player.MovementInput.y > 0.0f)
                 {
                     ModelRotAnim(player, 35f);

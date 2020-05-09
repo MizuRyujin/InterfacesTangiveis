@@ -28,5 +28,11 @@ namespace Scripts
         /// </summary>
         /// <param name="player"> Reference to player script </param>
         public abstract void Movement(Player player);
+
+        /// <summary>
+        /// Abstract method to rotate player game object towards input, uses Rigidbody
+        /// </summary>
+        /// <param name="player"> Reference to player script </param>
+        public abstract void RotateToInput(Player player);
     }
 }
