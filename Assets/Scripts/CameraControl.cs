@@ -10,8 +10,8 @@ namespace Scripts
 
         private void LateUpdate()
         {
-            Vector3 desiredPos =_target.position - transform.forward * _distanceToTarget;
             RotateWithPlayer();
+            Vector3 desiredPos =_target.position - transform.forward * _distanceToTarget;
             transform.position = desiredPos;
         }
 
