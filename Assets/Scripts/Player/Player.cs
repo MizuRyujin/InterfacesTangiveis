@@ -25,6 +25,11 @@ namespace Scripts
         /// Reference to the flight movement strategy behaviour
         /// </summary>
         private FlyBehaviour _flightMovement = default;
+        
+        /// <summary>
+        /// Reference to the model game object
+        /// </summary>
+        private Transform _model = default;
 
         //* Input system variables
         /// <summary>
@@ -41,6 +46,7 @@ namespace Scripts
         public Rigidbody Rb { get => _rb; }
         public PlayerValues Values { get => _values; }
         public Vector2 MovementInput { get => _movementInput; }
+        public Transform Model { get => _model; }
 
         /// <summary>
         /// Awake is called when the script instance is being loaded.
@@ -48,10 +54,11 @@ namespace Scripts
         private void Awake()
         {
             _rb = GetComponent<Rigidbody>();
-            _rb.isKinematic = true;
+            //_rb.isKinematic = true;
 
             _flightMovement = new FlyBehaviour();
             _currMovement = _flightMovement;
+            _model = transform.GetChild(0);
 
             _playerController = new PlayerController();
             _playerController.FlightActions.MovementControl.performed += ctx => _movementInput = ctx.ReadValue<Vector2>();
