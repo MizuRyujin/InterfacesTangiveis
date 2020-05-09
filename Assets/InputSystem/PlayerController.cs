@@ -19,7 +19,7 @@ public class @PlayerController : IInputActionCollection, IDisposable
             ""id"": ""6fff86af-f0ce-4e7b-aca8-36923b858b2c"",
             ""actions"": [
                 {
-                    ""name"": ""FlightControl"",
+                    ""name"": ""MovementControl"",
                     ""type"": ""PassThrough"",
                     ""id"": ""450e6772-366e-4585-85e8-c0cefd3937e8"",
                     ""expectedControlType"": ""Vector2"",
@@ -65,7 +65,7 @@ public class @PlayerController : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""FlightControl"",
+                    ""action"": ""MovementControl"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -76,7 +76,7 @@ public class @PlayerController : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""FlightControl"",
+                    ""action"": ""MovementControl"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -87,7 +87,7 @@ public class @PlayerController : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""FlightControl"",
+                    ""action"": ""MovementControl"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -98,7 +98,7 @@ public class @PlayerController : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""FlightControl"",
+                    ""action"": ""MovementControl"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -109,7 +109,7 @@ public class @PlayerController : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""FlightControl"",
+                    ""action"": ""MovementControl"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -120,7 +120,7 @@ public class @PlayerController : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""FlightControl"",
+                    ""action"": ""MovementControl"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -142,7 +142,7 @@ public class @PlayerController : IInputActionCollection, IDisposable
 }");
         // FlightActions
         m_FlightActions = asset.FindActionMap("FlightActions", throwIfNotFound: true);
-        m_FlightActions_FlightControl = m_FlightActions.FindAction("FlightControl", throwIfNotFound: true);
+        m_FlightActions_MovementControl = m_FlightActions.FindAction("MovementControl", throwIfNotFound: true);
         m_FlightActions_LiftOff = m_FlightActions.FindAction("LiftOff", throwIfNotFound: true);
     }
 
@@ -193,13 +193,13 @@ public class @PlayerController : IInputActionCollection, IDisposable
     // FlightActions
     private readonly InputActionMap m_FlightActions;
     private IFlightActionsActions m_FlightActionsActionsCallbackInterface;
-    private readonly InputAction m_FlightActions_FlightControl;
+    private readonly InputAction m_FlightActions_MovementControl;
     private readonly InputAction m_FlightActions_LiftOff;
     public struct FlightActionsActions
     {
         private @PlayerController m_Wrapper;
         public FlightActionsActions(@PlayerController wrapper) { m_Wrapper = wrapper; }
-        public InputAction @FlightControl => m_Wrapper.m_FlightActions_FlightControl;
+        public InputAction @MovementControl => m_Wrapper.m_FlightActions_MovementControl;
         public InputAction @LiftOff => m_Wrapper.m_FlightActions_LiftOff;
         public InputActionMap Get() { return m_Wrapper.m_FlightActions; }
         public void Enable() { Get().Enable(); }
@@ -210,9 +210,9 @@ public class @PlayerController : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_FlightActionsActionsCallbackInterface != null)
             {
-                @FlightControl.started -= m_Wrapper.m_FlightActionsActionsCallbackInterface.OnFlightControl;
-                @FlightControl.performed -= m_Wrapper.m_FlightActionsActionsCallbackInterface.OnFlightControl;
-                @FlightControl.canceled -= m_Wrapper.m_FlightActionsActionsCallbackInterface.OnFlightControl;
+                @MovementControl.started -= m_Wrapper.m_FlightActionsActionsCallbackInterface.OnMovementControl;
+                @MovementControl.performed -= m_Wrapper.m_FlightActionsActionsCallbackInterface.OnMovementControl;
+                @MovementControl.canceled -= m_Wrapper.m_FlightActionsActionsCallbackInterface.OnMovementControl;
                 @LiftOff.started -= m_Wrapper.m_FlightActionsActionsCallbackInterface.OnLiftOff;
                 @LiftOff.performed -= m_Wrapper.m_FlightActionsActionsCallbackInterface.OnLiftOff;
                 @LiftOff.canceled -= m_Wrapper.m_FlightActionsActionsCallbackInterface.OnLiftOff;
@@ -220,9 +220,9 @@ public class @PlayerController : IInputActionCollection, IDisposable
             m_Wrapper.m_FlightActionsActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @FlightControl.started += instance.OnFlightControl;
-                @FlightControl.performed += instance.OnFlightControl;
-                @FlightControl.canceled += instance.OnFlightControl;
+                @MovementControl.started += instance.OnMovementControl;
+                @MovementControl.performed += instance.OnMovementControl;
+                @MovementControl.canceled += instance.OnMovementControl;
                 @LiftOff.started += instance.OnLiftOff;
                 @LiftOff.performed += instance.OnLiftOff;
                 @LiftOff.canceled += instance.OnLiftOff;
@@ -250,7 +250,7 @@ public class @PlayerController : IInputActionCollection, IDisposable
     }
     public interface IFlightActionsActions
     {
-        void OnFlightControl(InputAction.CallbackContext context);
+        void OnMovementControl(InputAction.CallbackContext context);
         void OnLiftOff(InputAction.CallbackContext context);
     }
 }

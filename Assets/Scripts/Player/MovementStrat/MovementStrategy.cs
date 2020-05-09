@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Scripts
 {
     /// <summary>
-    /// Class responsible
+    /// Class responsible for movement strategies
     /// </summary>
     public abstract class MovementStrategy
     {
@@ -11,8 +11,16 @@ namespace Scripts
         /// Variable to store movement direction vector
         /// </summary>
         protected Vector3 _movement = default;
+
+        /// <summary>
+        /// Variable to check if player is flying or not
+        /// </summary>
         protected bool isFlying = default;
 
+        /// <summary>
+        /// Property to check if player is flying or not
+        /// </summary>
+        /// <value></value>
         public bool IsFlying { get => isFlying; }
 
         /// <summary>

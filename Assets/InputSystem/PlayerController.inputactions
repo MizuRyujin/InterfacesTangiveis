@@ -6,7 +6,7 @@
             "id": "6fff86af-f0ce-4e7b-aca8-36923b858b2c",
             "actions": [
                 {
-                    "name": "FlightControl",
+                    "name": "MovementControl",
                     "type": "PassThrough",
                     "id": "450e6772-366e-4585-85e8-c0cefd3937e8",
                     "expectedControlType": "Vector2",
@@ -52,7 +52,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "FlightControl",
+                    "action": "MovementControl",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -63,7 +63,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "FlightControl",
+                    "action": "MovementControl",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -74,7 +74,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "FlightControl",
+                    "action": "MovementControl",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -85,7 +85,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "FlightControl",
+                    "action": "MovementControl",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -96,7 +96,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "FlightControl",
+                    "action": "MovementControl",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -107,7 +107,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "FlightControl",
+                    "action": "MovementControl",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
