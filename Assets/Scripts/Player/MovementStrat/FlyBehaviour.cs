@@ -10,7 +10,7 @@ namespace Scripts
             RotateToInput(player);
             RotateModel(player);
         }
-        
+
         public override void RotateToInput(Player player)
         {
             if (player.MovementInput != Vector2.zero)
@@ -30,7 +30,6 @@ namespace Scripts
                 player.transform.position + player.transform.forward *
                 player.Values.FlightSpeed * Time.deltaTime);
         }
-
 
         private void RotateModel(Player player)
         {
