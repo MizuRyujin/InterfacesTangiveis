@@ -80,7 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f95a10cdcd08dfb4f9d7fc020ac3b04b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _target: {fileID: 0}
+  _target: {fileID: 2621279730976240317, guid: 8672b9de150343944b994f9647d58d33, type: 3}
   _distanceToTarget: 3
 --- !u!1 &5478436454977312338
 GameObject:
