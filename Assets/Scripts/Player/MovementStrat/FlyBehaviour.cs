@@ -21,17 +21,16 @@ namespace Scripts
 
         private void RotateToInput(Player player)
         {
+            //! THIS TYPE OF ROTATION DOESN'T CONSIDER IF PLAYER IS LATERAL
             if (player.MovementInput != Vector2.zero)
             {
                 _movement += new Vector3(
                     player.MovementInput.y, 0.0f, -player.MovementInput.x) *
                     player.Values.RotateSpeed * Time.deltaTime;
             }
-            else
-            {
-                _movement = Vector3.zero;
-            }
-            player.Rb.transform.Rotate(_movement);
+
+            //* WITH THIS METHOD PLAYER WON'T STOP MOVING WHILE ROTATING, BUT IS BUGGY
+            player.Rb.MoveRotation(Quaternion.Euler(_movement));
         }
     }
 }

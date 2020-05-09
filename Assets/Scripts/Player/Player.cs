@@ -61,7 +61,7 @@ namespace Scripts
         /// <summary>
         /// This function is called every fixed framerate frame, if the MonoBehaviour is enabled.
         /// </summary>
-        private void Update()
+        private void FixedUpdate()
         {
             _currMovement.Movement(this);
         }

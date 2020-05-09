@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: PlayerValues
   m_EditorClassIdentifier: 
   _flightSpeed: 10
-  _rotateSpeed: 2
+  _rotateSpeed: 20
   _maxRotationSpeed: 10
   _walkSpeed: 10
