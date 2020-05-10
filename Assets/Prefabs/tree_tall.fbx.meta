@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a6238fbca631bea4c80cae785270c37a
+guid: 25b5688d9149bdd4a9c8c021203ccd09
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable: []
@@ -8,12 +8,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: leafsGreen
-    second: {fileID: 2100000, guid: 0742337118881b649b02fa78249d9683, type: 2}
+    second: {fileID: 2100000, guid: d151929e1e1c9d54fbc7221818c44c5c, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: woodBark
-    second: {fileID: 2100000, guid: c1ce5124d805d0f49b0eb89e8f89f708, type: 2}
+    second: {fileID: 2100000, guid: 252290c917ee5e64ba39ec18d5ee8eaf, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -41,7 +41,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 3
@@ -90,7 +90,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 3
+    globalScale: 0.29999998
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
