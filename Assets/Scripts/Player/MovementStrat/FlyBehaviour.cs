@@ -2,8 +2,15 @@ using UnityEngine;
 
 namespace Scripts
 {
+    /// <summary>
+    /// Class responsible for the flight behaviour
+    /// </summary>
     public class FlyBehaviour : MovementStrategy
     {
+        /// <summary>
+        /// Override method for the flight movement
+        /// </summary>
+        /// <param name="player"> Reference to the player script </param>
         public override void Movement(Player player)
         {
             AlwaysForward(player);
@@ -11,6 +18,10 @@ namespace Scripts
             RotateModel(player);
         }
 
+        /// <summary>
+        /// Override method for the rotation towards player input
+        /// </summary>
+        /// <param name="player"> Reference to the player script </param>
         public override void RotateToInput(Player player)
         {
             if (player.MovementInput != Vector2.zero)
