@@ -43,9 +43,28 @@ namespace Scripts
         private Vector2 _movementInput = default;
 
         //* Class properties
+        /// <summary>
+        /// Property that has the reference to the players rigidbody
+        /// </summary>
+        /// <value> Private variable value </value>
         public Rigidbody Rb { get => _rb; }
+
+        /// <summary>
+        /// Property that has the reference to the player values scriptable object
+        /// </summary>
+        /// <value> Private variable value </value>
         public PlayerValues Values { get => _values; }
+
+        /// <summary>
+        /// Property to get the the player input value
+        /// </summary>
+        /// <value> Private variable value </value>
         public Vector2 MovementInput { get => _movementInput; }
+
+        /// <summary>
+        /// Property to get the player model transform
+        /// </summary>
+        /// <value> Private variable value </value>
         public Transform Model { get => _model; }
 
         /// <summary>
