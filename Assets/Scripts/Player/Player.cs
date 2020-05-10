@@ -28,6 +28,8 @@ namespace Scripts
         /// Reference to the flight movement strategy behaviour
         /// </summary>
         private FlyBehaviour _flightMovement = default;
+
+        private WalkingBehaviour _walkMovement = default;
         
         /// <summary>
         /// Reference to the model game object
@@ -81,7 +83,9 @@ namespace Scripts
             //_rb.isKinematic = true;
 
             _flightMovement = new FlyBehaviour();
-            _currMovement = _flightMovement;
+            _walkMovement = new WalkingBehaviour();
+            // _currMovement = _flightMovement;
+            _currMovement = _walkMovement;
             _model = transform.GetChild(0);
 
             _playerController = new PlayerController();
