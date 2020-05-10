@@ -84,8 +84,8 @@ namespace Scripts
 
             _flightMovement = new FlyBehaviour();
             _walkMovement = new WalkingBehaviour();
-            // _currMovement = _flightMovement;
-            _currMovement = _walkMovement;
+            _currMovement = _flightMovement;
+            //_currMovement = _walkMovement;
             _model = transform.GetChild(0);
 
             _playerController = new PlayerController();
