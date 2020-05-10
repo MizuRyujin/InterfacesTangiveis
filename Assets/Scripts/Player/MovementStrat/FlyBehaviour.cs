@@ -64,11 +64,11 @@ namespace Scripts
             {
                 if (player.MovementInput.x < 0.0f)
                 {
-                    ModelRotAnim(player, 0.0f, 60.0f);
+                    ModelRotAnim(player, 0.0f, 0.0f, 60.0f);
                 }
                 if (player.MovementInput.x > 0.0f)
                 {
-                    ModelRotAnim(player, 0.0f, -60.0f);
+                    ModelRotAnim(player, 0.0f, 0.0f, -60.0f);
                 }
             }
             if (player.MovementInput != Vector2.zero && (_movement.x != -60.0f && _movement.x != 60.0f))
@@ -86,38 +86,6 @@ namespace Scripts
             {
                 ResetQuaternion(player);
             }
-        }
-
-        /// <summary>
-        /// Method that does a smooth rotation of an object using a quaternion
-        /// </summary>
-        /// <param name="player">
-        /// Reference to the player script
-        /// </param>
-        /// <param name="xValue">
-        /// Vector x value to be used in a euler quaternion 
-        /// </param>
-        /// <param name="zValue">
-        /// Vector z value to be used in a euler quaternion
-        /// </param>
-        private void ModelRotAnim(Player player, float xValue = 0.0f, float zValue = 0.0f)
-        {
-            player.Model.localRotation = Quaternion.Slerp(
-                    player.Model.localRotation,
-                    Quaternion.Euler(xValue, 0.0f, zValue),
-                    (player.Values.ModelRotationSpeed) * Time.deltaTime);
-        }
-
-        /// <summary>
-        /// Method to reset the rotation of an object
-        /// </summary>
-        /// <param name="player"> Reference to player script </param>
-        private void ResetQuaternion(Player player)
-        {
-            player.Model.localRotation = Quaternion.Slerp(
-                player.Model.localRotation,
-                Quaternion.identity,
-                (player.Values.ModelRotationSpeed) * Time.deltaTime);
         }
     }
 }
