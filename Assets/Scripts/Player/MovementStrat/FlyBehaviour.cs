@@ -7,6 +7,9 @@ namespace Scripts
     /// </summary>
     public class FlyBehaviour : MovementStrategy
     {
+        /// <summary>
+        /// Variable to check if player is turning horizontally or not
+        /// </summary>
         private bool _turning;
 
         /// <summary>
@@ -56,6 +59,7 @@ namespace Scripts
         /// <param name="player"> Reference to the player script </param>
         private void AlwaysForward(Player player)
         {
+            //* Aux variable to store player values flying speed
             float speed;
 
             if (_turning)
@@ -72,8 +76,6 @@ namespace Scripts
             player.Rb.MovePosition(
                 player.transform.position + player.transform.forward *
                 speed * Time.deltaTime);
-
-            Debug.Log(speed);
         }
 
         /// <summary>
