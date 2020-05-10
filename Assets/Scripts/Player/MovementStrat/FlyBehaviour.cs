@@ -7,6 +7,8 @@ namespace Scripts
     /// </summary>
     public class FlyBehaviour : MovementStrategy
     {
+        private bool _turning;
+
         /// <summary>
         /// Override method for the flight movement
         /// </summary>
@@ -16,8 +18,6 @@ namespace Scripts
             AlwaysForward(player);
             RotateToInput(player);
             RotateModel(player);
-
-            Debug.Log(_movement);
         }
 
         /// <summary>
@@ -28,6 +28,15 @@ namespace Scripts
         {
             if (player.MovementInput != Vector2.zero)
             {
+                if (player.MovementInput.x != 0.0f)
+                {
+                    _turning = true;
+                }
+                else
+                {
+                    _turning = false;
+                }
+
                 _movement += new Vector3(
                     player.MovementInput.y, player.MovementInput.x, 0.0f) *
                     player.Values.RotateSpeed * Time.deltaTime;
@@ -47,11 +56,24 @@ namespace Scripts
         /// <param name="player"> Reference to the player script </param>
         private void AlwaysForward(Player player)
         {
+            float speed;
+
+            if (_turning)
+            {
+                speed = player.Values.FlightSpeed * 0.5f;    
+            }
+            else
+            {
+                speed = player.Values.FlightSpeed;
+            }
+
             //* Even though move position says that moves the kinematic body,
             //* RB isn't kinematic
             player.Rb.MovePosition(
                 player.transform.position + player.transform.forward *
-                player.Values.FlightSpeed * Time.deltaTime);
+                speed * Time.deltaTime);
+
+            Debug.Log(speed);
         }
 
         /// <summary>
