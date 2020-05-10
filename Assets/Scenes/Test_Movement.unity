@@ -550,6 +550,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlyingCam
       objectReference: {fileID: 0}
+    - target: {fileID: 6285834448057879110, guid: 93f067b474e3d2d4b89aca969a722e53,
+        type: 3}
+      propertyPath: m_LookAt
+      value: 
+      objectReference: {fileID: 2083331046}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93f067b474e3d2d4b89aca969a722e53, type: 3}
 --- !u!1001 &2621279729166592347
@@ -559,6 +564,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2621279730976240306, guid: 8672b9de150343944b994f9647d58d33,
+        type: 3}
+      propertyPath: _devMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2621279730976240317, guid: 8672b9de150343944b994f9647d58d33,
         type: 3}
       propertyPath: m_LocalPosition.x
