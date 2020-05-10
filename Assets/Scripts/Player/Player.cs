@@ -4,6 +4,9 @@ namespace Scripts
 {
     public class Player : MonoBehaviour
     {
+        //* DEV VARIABLES
+        [SerializeField] private bool _devMode = default;
+
         //* Class variables
         /// <summary>
         /// Reference to player values scriptable object
@@ -66,6 +69,8 @@ namespace Scripts
         /// </summary>
         /// <value> Private variable value </value>
         public Transform Model { get => _model; }
+
+        public bool DevMode { get => _devMode; }
 
         /// <summary>
         /// Awake is called when the script instance is being loaded.

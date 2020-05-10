@@ -16,6 +16,8 @@ namespace Scripts
             AlwaysForward(player);
             RotateToInput(player);
             RotateModel(player);
+
+            Debug.Log(_movement);
         }
 
         /// <summary>
@@ -29,6 +31,11 @@ namespace Scripts
                 _movement += new Vector3(
                     player.MovementInput.y, player.MovementInput.x, 0.0f) *
                     player.Values.RotateSpeed * Time.deltaTime;
+
+                if (!player.DevMode)
+                {
+                    _movement.x = Mathf.Clamp(_movement.x, -60, 60);
+                }
             }
 
             player.Rb.MoveRotation(Quaternion.Euler(_movement));
@@ -63,6 +70,9 @@ namespace Scripts
                 {
                     ModelRotAnim(player, 0.0f, -60.0f);
                 }
+            }
+            if (player.MovementInput != Vector2.zero && (_movement.x != -60.0f && _movement.x != 60.0f))
+            {
                 if (player.MovementInput.y > 0.0f)
                 {
                     ModelRotAnim(player, 35f);
