@@ -6,13 +6,14 @@ namespace Scripts
     {
         //* DEV VARIABLES
         [SerializeField] private bool _devMode = default;
+        //*
 
         //* Class variables
         /// <summary>
         /// Reference to player values scriptable object
         /// </summary>
         [SerializeField] private PlayerValues _values = default;
-        
+
         /// <summary>
         /// Reference to player game object Rigidbody reference
         /// </summary>
@@ -29,8 +30,11 @@ namespace Scripts
         /// </summary>
         private FlyBehaviour _flightMovement = default;
 
+        /// <summary>
+        /// Reference to the walk movement strategy behaviour
+        /// </summary>
         private WalkingBehaviour _walkMovement = default;
-        
+
         /// <summary>
         /// Reference to the model game object
         /// </summary>
@@ -46,6 +50,11 @@ namespace Scripts
         /// Vector to store input system movement input
         /// </summary>
         private Vector2 _movementInput = default;
+
+        /// <summary>
+        /// Variable to check if player is flying or not
+        /// </summary>
+        private bool _flying = default;
 
         //* Class properties
         /// <summary>
@@ -74,22 +83,24 @@ namespace Scripts
 
         public bool DevMode { get => _devMode; }
 
+
         /// <summary>
         /// Awake is called when the script instance is being loaded.
         /// </summary>
         private void Awake()
         {
             _rb = GetComponent<Rigidbody>();
-            //_rb.isKinematic = true;
 
             _flightMovement = new FlyBehaviour();
             _walkMovement = new WalkingBehaviour();
             _currMovement = _flightMovement;
-            //_currMovement = _walkMovement;
+            _flying = true;
+
             _model = transform.GetChild(0);
 
             _playerController = new PlayerController();
             _playerController.FlightActions.MovementControl.performed += ctx => _movementInput = ctx.ReadValue<Vector2>();
+            _playerController.FlightActions.LiftOff.performed += ctx => ChangeMovement();
 
         }
 
@@ -101,12 +112,37 @@ namespace Scripts
             _currMovement.Movement(this);
         }
 
+        private void ChangeMovement()
+        {
+            Vector3 auxRotation;
+            _flying = !_flying;
+
+            if (_flying)
+            {
+                auxRotation = _currMovement.Rotation;
+                auxRotation.x = -20.0f;
+                _currMovement = _flightMovement;
+                _currMovement.Rotation = auxRotation;
+                _rb.useGravity = false;
+            }
+            else
+            {
+                auxRotation = _currMovement.Rotation;
+                auxRotation.x = 0.0f;
+                _currMovement = _walkMovement;
+                _model.localRotation = Quaternion.identity;
+                _currMovement.Rotation = auxRotation;
+                _rb.useGravity = true;
+            }
+        }
+
         /// <summary>
         /// This function is called when the object becomes enabled and active.
         /// </summary>
         private void OnEnable()
         {
             _playerController.FlightActions.MovementControl.Enable();
+            _playerController.FlightActions.LiftOff.Enable();
 
             _playerController.Enable();
         }
@@ -117,6 +153,7 @@ namespace Scripts
         private void OnDisable()
         {
             _playerController.FlightActions.MovementControl.Enable();
+            _playerController.FlightActions.LiftOff.Enable();
 
             _playerController.Disable();
         }
