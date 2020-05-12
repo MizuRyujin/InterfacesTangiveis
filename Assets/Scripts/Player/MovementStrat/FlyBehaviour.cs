@@ -31,13 +31,13 @@ namespace Scripts
         {
             if (player.MovementInput != Vector2.zero)
             {
-                _movement += new Vector3(
+                _rotation += new Vector3(
                     player.MovementInput.y, player.MovementInput.x, 0.0f) *
                     player.Values.RotateSpeed * Time.deltaTime;
 
                 if (!player.DevMode)
                 {
-                    _movement.x = Mathf.Clamp(_movement.x, -60, 60);
+                    _rotation.x = Mathf.Clamp(_rotation.x, -60, 60);
                 }
             }
             if (player.MovementInput.x != 0.0f)
@@ -49,7 +49,7 @@ namespace Scripts
                 _turning = false;
             }
 
-            player.Rb.MoveRotation(Quaternion.Euler(_movement));
+            player.Rb.MoveRotation(Quaternion.Euler(_rotation));
         }
 
         /// <summary>
