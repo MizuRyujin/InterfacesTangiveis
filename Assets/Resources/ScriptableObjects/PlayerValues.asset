@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44eca3adf55fa7640ae71de63f4edce8, type: 3}
   m_Name: PlayerValues
   m_EditorClassIdentifier: 
-  _flightSpeed: 7
+  _flightSpeed: 10
   _rotateSpeed: 50
   _modelRotationSpeed: 2
-  _walkSpeed: 3
+  _walkSpeed: 10

@@ -12,12 +12,29 @@ namespace Scripts
 
         public override void RotateToInput(Player player)
         {
-            throw new System.NotImplementedException();
+            if (player.MovementInput != Vector2.zero)
+            {
+                _movement.y += player.MovementInput.x *
+                    player.Values.RotateSpeed * Time.deltaTime;
+            }
+
+            player.Rb.MoveRotation(Quaternion.Euler(_movement));
         }
 
         private void WalkForward(Player player)
         {
+            if (player.MovementInput != Vector2.zero)
+            {
+                _movement.z = player.MovementInput.y *
+                    player.Values.WalkSpeed * Time.deltaTime;
+            }
+            else
+            {
+                _movement.z = 0.0f;
+            }
 
+            player.Rb.MovePosition(player.Rb.transform.position +
+                player.Rb.transform.forward * _movement.z);
         }
     }
 }
