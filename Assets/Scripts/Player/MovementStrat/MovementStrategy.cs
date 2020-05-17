@@ -12,6 +12,10 @@ namespace Scripts
         /// </summary>
         protected Vector3 _movement = default;
 
+        protected Vector3 _rotation = default;
+
+        public Vector3 Rotation { get => _rotation; set => _rotation = value;}
+
         /// <summary>
         /// Abstract movement method, to be called in fixed update, uses Rigidbody
         /// </summary>
@@ -42,7 +46,7 @@ namespace Scripts
             player.Model.localRotation = Quaternion.Slerp(
                     player.Model.localRotation,
                     Quaternion.Euler(xValue, yValue, zValue),
-                    (player.Values.ModelRotationSpeed) * Time.deltaTime);
+                    player.Values.ModelRotationSpeed * Time.deltaTime);
         }
 
         /// <summary>
@@ -54,7 +58,7 @@ namespace Scripts
             player.Model.localRotation = Quaternion.Slerp(
                 player.Model.localRotation,
                 Quaternion.identity,
-                (player.Values.ModelRotationSpeed) * Time.deltaTime);
+                player.Values.ModelRotationSpeed * Time.deltaTime);
         }
     }
 }

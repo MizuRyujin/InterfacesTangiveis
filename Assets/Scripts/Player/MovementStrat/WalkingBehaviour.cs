@@ -14,11 +14,11 @@ namespace Scripts
         {
             if (player.MovementInput != Vector2.zero)
             {
-                _movement.y += player.MovementInput.x *
+                _rotation.y += player.MovementInput.x *
                     player.Values.RotateSpeed * Time.deltaTime;
             }
 
-            player.Rb.MoveRotation(Quaternion.Euler(_movement));
+            player.Rb.MoveRotation(Quaternion.Euler(_rotation));
         }
 
         private void WalkForward(Player player)

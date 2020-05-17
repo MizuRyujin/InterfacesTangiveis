@@ -31,26 +31,25 @@ namespace Scripts
         {
             if (player.MovementInput != Vector2.zero)
             {
-                if (player.MovementInput.x != 0.0f)
-                {
-                    _turning = true;
-                }
-                else
-                {
-                    _turning = false;
-                }
-
-                _movement += new Vector3(
+                _rotation += new Vector3(
                     player.MovementInput.y, player.MovementInput.x, 0.0f) *
                     player.Values.RotateSpeed * Time.deltaTime;
 
                 if (!player.DevMode)
                 {
-                    _movement.x = Mathf.Clamp(_movement.x, -60, 60);
+                    _rotation.x = Mathf.Clamp(_rotation.x, -60, 60);
                 }
             }
+            if (player.MovementInput.x != 0.0f)
+            {
+                _turning = true;
+            }
+            else
+            {
+                _turning = false;
+            }
 
-            player.Rb.MoveRotation(Quaternion.Euler(_movement));
+            player.Rb.MoveRotation(Quaternion.Euler(_rotation));
         }
 
         /// <summary>
@@ -64,7 +63,7 @@ namespace Scripts
 
             if (_turning)
             {
-                speed = player.Values.FlightSpeed * 0.5f;    
+                speed = player.Values.FlightSpeed * 0.5f;
             }
             else
             {
