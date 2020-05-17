@@ -18750,17 +18750,17 @@ PrefabInstance:
     - target: {fileID: 1453255864618548985, guid: 685000d272b2563489fe6245d234ddce,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -3e-45
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1453255864618548985, guid: 685000d272b2563489fe6245d234ddce,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1e-45
+      value: -1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 1453255864618548985, guid: 685000d272b2563489fe6245d234ddce,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 7.892316e-14
+      value: 0.0000000019457367
       objectReference: {fileID: 0}
     - target: {fileID: 1453255864618548985, guid: 685000d272b2563489fe6245d234ddce,
         type: 3}
@@ -18806,6 +18806,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 718682788, guid: 93f067b474e3d2d4b89aca969a722e53, type: 3}
+      propertyPath: m_VerticalDamping
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 718682788, guid: 93f067b474e3d2d4b89aca969a722e53, type: 3}
+      propertyPath: m_HorizontalDamping
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 718682789, guid: 93f067b474e3d2d4b89aca969a722e53, type: 3}
+      propertyPath: m_XDamping
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 718682789, guid: 93f067b474e3d2d4b89aca969a722e53, type: 3}
+      propertyPath: m_YDamping
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 718682789, guid: 93f067b474e3d2d4b89aca969a722e53, type: 3}
+      propertyPath: m_ZDamping
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 718682789, guid: 93f067b474e3d2d4b89aca969a722e53, type: 3}
+      propertyPath: m_AngularDamping
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 3098465706656014057, guid: 93f067b474e3d2d4b89aca969a722e53,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -18824,17 +18848,17 @@ PrefabInstance:
     - target: {fileID: 3098465706656014057, guid: 93f067b474e3d2d4b89aca969a722e53,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -3e-45
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3098465706656014057, guid: 93f067b474e3d2d4b89aca969a722e53,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1e-45
+      value: -1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 3098465706656014057, guid: 93f067b474e3d2d4b89aca969a722e53,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 7.892316e-14
+      value: 0.0000000019457367
       objectReference: {fileID: 0}
     - target: {fileID: 3098465706656014057, guid: 93f067b474e3d2d4b89aca969a722e53,
         type: 3}
