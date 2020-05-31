@@ -1,8 +1,7 @@
-﻿using System;
-using UnityEngine;
-
+﻿/// <summary>
+/// Interactable interface
+/// </summary>
 public interface IInteractable
 {
-    Action OnInteract();
     void Interact();
 }
