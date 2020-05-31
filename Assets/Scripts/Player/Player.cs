@@ -156,9 +156,9 @@ namespace Scripts
         /// </summary>
         private void StaminaCounter()
         {
-            if(_stamina <= 0f)
+            if(_stamina <= 0f && _flying)
             {
-                _currMovement = _walkMovement;
+                ChangeMovement();
             }
         }
 
