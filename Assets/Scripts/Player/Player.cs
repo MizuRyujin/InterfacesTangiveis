@@ -156,10 +156,20 @@ namespace Scripts
         /// </summary>
         private void StaminaCounter()
         {
-            if(_stamina <= 0f && _flying)
+            if (_stamina <= 0f && _flying)
             {
                 ChangeMovement();
             }
+        }
+
+        /// <summary>
+        /// Activated on wumpa catch, adds stamina
+        /// </summary>
+        public void AddStamina()
+        {
+            Stamina += 25;
+
+            Stamina = Stamina > 100 ? _values.MaxStamina : Stamina;
         }
 
         /// <summary>
