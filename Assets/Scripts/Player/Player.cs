@@ -14,6 +14,8 @@ namespace Scripts
         /// </summary>
         [SerializeField] private PlayerValues _values = default;
 
+        private int _stamina;
+
         /// <summary>
         /// Reference to player game object Rigidbody reference
         /// </summary>
@@ -81,6 +83,11 @@ namespace Scripts
         /// <value> Private variable value </value>
         public Transform Model { get => _model; }
 
+        /// <summary>
+        /// Current stamina property
+        /// </summary>
+        public int Stamina { get => _stamina; set => _stamina = value; }
+
         public bool DevMode { get => _devMode; }
 
 
@@ -90,6 +97,8 @@ namespace Scripts
         private void Awake()
         {
             _rb = GetComponent<Rigidbody>();
+
+            _stamina = _values.MaxStamina;
 
             _flightMovement = new FlyBehaviour();
             _walkMovement = new WalkingBehaviour();
@@ -102,6 +111,12 @@ namespace Scripts
             _playerController.FlightActions.MovementControl.performed += ctx => _movementInput = ctx.ReadValue<Vector2>();
             _playerController.FlightActions.LiftOff.performed += ctx => ChangeMovement();
 
+        }
+
+        private void Update()
+        {
+            StaminaCounter();
+            print(Stamina);
         }
 
         /// <summary>
@@ -133,6 +148,17 @@ namespace Scripts
                 _model.localRotation = Quaternion.identity;
                 _currMovement.Rotation = auxRotation;
                 _rb.useGravity = true;
+            }
+        }
+
+        /// <summary>
+        /// Counts stamina
+        /// </summary>
+        private void StaminaCounter()
+        {
+            if(_stamina <= 0f)
+            {
+                _currMovement = _walkMovement;
             }
         }
 
