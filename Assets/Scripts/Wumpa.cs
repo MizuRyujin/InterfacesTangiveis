@@ -5,23 +5,25 @@ using UnityEngine;
 public class Wumpa : MonoBehaviour, IInteractable
 {
     [SerializeField] private float respawnTime = 5f;
+    [SerializeField] private ParticleSystem _particlesIdle;
+    [SerializeField] private ParticleSystem _particleInteract;
 
     private MeshRenderer _mesh;
     private CapsuleCollider _collider;
-    private ParticleSystem _particles;
     private WaitForSeconds _respawnTimer;
 
     private void Awake()
     {
         _mesh = gameObject.GetComponent<MeshRenderer>();
         _collider = gameObject.GetComponent<CapsuleCollider>();
-        _particles = gameObject.GetComponentInChildren<ParticleSystem>();
         _respawnTimer = new WaitForSeconds(respawnTime);
     }
 
     public void Interact()
     {
         Debug.Log("Interacting");
+
+        _particleInteract.Play();
 
         Despawn();
     }
@@ -38,7 +40,7 @@ public class Wumpa : MonoBehaviour, IInteractable
     {
         _collider.enabled = false;
         _mesh.enabled = false;
-        _particles.gameObject.SetActive(false);
+        _particlesIdle.gameObject.SetActive(false);
 
         StartCoroutine(TimerRespawn());
     }
@@ -50,7 +52,7 @@ public class Wumpa : MonoBehaviour, IInteractable
     {
         _collider.enabled = true;
         _mesh.enabled = true;
-        _particles.gameObject.SetActive(true);
+        _particlesIdle.gameObject.SetActive(true);
     }
 
     /// <summary>
