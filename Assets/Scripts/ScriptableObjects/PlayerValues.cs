@@ -30,6 +30,16 @@ namespace Scripts
         [SerializeField] private float _walkSpeed = 10.0f;
 
         /// <summary>
+        /// Max stamina to initialize
+        /// </summary>
+        [SerializeField] private int _maxStamina = 100;
+
+        /// <summary>
+        /// Proprety that gets stamina
+        /// </summary>
+        public int MaxStamina => _maxStamina;
+
+        /// <summary>
         /// Property to get the flight speed value
         /// </summary>
         /// <value> Private variable value </value>

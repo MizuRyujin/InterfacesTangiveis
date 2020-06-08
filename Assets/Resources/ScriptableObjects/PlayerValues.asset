@@ -16,3 +16,4 @@ MonoBehaviour:
   _rotateSpeed: 50
   _modelRotationSpeed: 2
   _walkSpeed: 10
+  _maxStamina: 100
