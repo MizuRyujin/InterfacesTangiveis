@@ -164,6 +164,10 @@ namespace Scripts
             }
         }
 
+        /// <summary>
+        /// Method to check if the player collided with the ground to change
+        /// movement type
+        /// </summary>
         private void CheckCollisionGround()
         {
             if (_flying)
