@@ -21,7 +21,6 @@ namespace Scripts
             AlwaysForward(player);
             RotateToInput(player);
             RotateModel(player);
-            UseStamina(player);
         }
 
         /// <summary>
@@ -109,26 +108,6 @@ namespace Scripts
             else
             {
                 ResetQuaternion(player);
-            }
-        }
-
-        float timer = 1f;
-
-        /// <summary>
-        /// Uses stamina 
-        /// </summary>
-        /// <param name="player"> Accepts a player </param>
-        private void UseStamina(Player player)
-        {
-            timer -= 1f * Time.deltaTime;
-
-            Debug.Log(timer);
-
-            if (timer <= 0)
-            {
-                player.Stamina -= 1;
-                timer = 1f;
-
             }
         }
     }

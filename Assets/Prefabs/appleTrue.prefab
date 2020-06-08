@@ -48,7 +48,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58e682b5f53e8f6489ed9982dac5c0f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawnTime: 20
+  _respawnTime: 5
+  _staminaGainAmount: 15
   _particlesIdle: {fileID: 4889248053684153288}
   _particleInteract: {fileID: 1922093922860830054}
 --- !u!33 &628138236998870525

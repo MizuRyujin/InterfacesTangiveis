@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Scripts
 {
@@ -14,7 +15,6 @@ namespace Scripts
         /// </summary>
         [SerializeField] private PlayerValues _values = default;
 
-        private int _stamina;
 
         /// <summary>
         /// Reference to player game object Rigidbody reference
@@ -22,73 +22,86 @@ namespace Scripts
         private Rigidbody _rb = default;
 
         //* Movement Strategy variables
+        private Stamina _staminaScript;
+
         /// <summary>
         /// Variable to store the current movement behaviour being used
         /// </summary>
-        private MovementStrategy _currMovement = default;
+        private MovementStrategy _currMovement;
 
         /// <summary>
         /// Reference to the flight movement strategy behaviour
         /// </summary>
-        private FlyBehaviour _flightMovement = default;
+        private FlyBehaviour _flightMovement;
 
         /// <summary>
         /// Reference to the walk movement strategy behaviour
         /// </summary>
-        private WalkingBehaviour _walkMovement = default;
+        private WalkingBehaviour _walkMovement;
 
         /// <summary>
         /// Reference to the model game object
         /// </summary>
-        private Transform _model = default;
+        private Transform _model;
 
         //* Input system variables
         /// <summary>
         /// Reference to the Unity's new input system script
         /// </summary>
-        private PlayerController _playerController = default;
+        private PlayerController _playerController;
 
         /// <summary>
         /// Vector to store input system movement input
         /// </summary>
-        private Vector2 _movementInput = default;
+        private Vector2 _movementInput;
 
         /// <summary>
         /// Variable to check if player is flying or not
         /// </summary>
-        private bool _flying = default;
+        private bool _flying;
+
 
         //* Class properties
         /// <summary>
         /// Property that has the reference to the players rigidbody
         /// </summary>
         /// <value> Private variable value </value>
-        public Rigidbody Rb { get => _rb; }
+        public Rigidbody Rb => _rb;
+
+        /// <summary>
+        /// Reference to the stamina script
+        /// </summary>
+        public Stamina StaminaScript => _staminaScript;
 
         /// <summary>
         /// Property that has the reference to the player values scriptable object
         /// </summary>
         /// <value> Private variable value </value>
-        public PlayerValues Values { get => _values; }
+        public PlayerValues Values => _values;
 
         /// <summary>
         /// Property to get the the player input value
         /// </summary>
         /// <value> Private variable value </value>
-        public Vector2 MovementInput { get => _movementInput; }
+        public Vector2 MovementInput => _movementInput;
 
         /// <summary>
         /// Property to get the player model transform
         /// </summary>
         /// <value> Private variable value </value>
-        public Transform Model { get => _model; }
+        public Transform Model => _model;
+        /// <summary>
+        /// Property to get the _flying bool value
+        /// </summary>
+        public bool Flying => _flying;
 
         /// <summary>
-        /// Current stamina property
+        /// Action type delegate to do stuff
         /// </summary>
-        public int Stamina { get => _stamina; set => _stamina = value; }
+        public Action Action;
 
-        public bool DevMode { get => _devMode; }
+        public bool DevMode => _devMode;
+
 
 
         /// <summary>
@@ -98,7 +111,7 @@ namespace Scripts
         {
             _rb = GetComponent<Rigidbody>();
 
-            _stamina = _values.MaxStamina;
+            _staminaScript = GetComponent<Stamina>();
 
             _flightMovement = new FlyBehaviour();
             _walkMovement = new WalkingBehaviour();
@@ -107,16 +120,12 @@ namespace Scripts
 
             _model = transform.GetChild(0);
 
+            Action += ChangeMovement;
+
             _playerController = new PlayerController();
             _playerController.FlightActions.MovementControl.performed += ctx => _movementInput = ctx.ReadValue<Vector2>();
             _playerController.FlightActions.LiftOff.performed += ctx => ChangeMovement();
 
-        }
-
-        private void Update()
-        {
-            StaminaCounter();
-            print(Stamina);
         }
 
         /// <summary>
@@ -125,8 +134,12 @@ namespace Scripts
         private void FixedUpdate()
         {
             _currMovement.Movement(this);
+            CheckCollisionGround();
         }
 
+        /// <summary>
+        /// Method to change the current movement
+        /// </summary>
         private void ChangeMovement()
         {
             Vector3 auxRotation;
@@ -151,25 +164,16 @@ namespace Scripts
             }
         }
 
-        /// <summary>
-        /// Counts stamina
-        /// </summary>
-        private void StaminaCounter()
+        private void CheckCollisionGround()
         {
-            if (_stamina <= 0f && _flying)
+            if (_flying)
             {
-                ChangeMovement();
+                if (Physics.Raycast(transform.position,
+                        transform.forward, 2f, LayerMask.GetMask("Ground")))
+                {
+                    ChangeMovement();
+                }
             }
-        }
-
-        /// <summary>
-        /// Activated on wumpa catch, adds stamina
-        /// </summary>
-        public void AddStamina()
-        {
-            Stamina += 25;
-
-            Stamina = Stamina > 100 ? _values.MaxStamina : Stamina;
         }
 
         /// <summary>
@@ -177,9 +181,6 @@ namespace Scripts
         /// </summary>
         private void OnEnable()
         {
-            _playerController.FlightActions.MovementControl.Enable();
-            _playerController.FlightActions.LiftOff.Enable();
-
             _playerController.Enable();
         }
 
@@ -188,10 +189,16 @@ namespace Scripts
         /// </summary>
         private void OnDisable()
         {
-            _playerController.FlightActions.MovementControl.Enable();
-            _playerController.FlightActions.LiftOff.Enable();
-
             _playerController.Disable();
+        }
+
+        /// <summary>
+        /// Callback to draw gizmos that are pickable and always drawn.
+        /// </summary>
+        void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawRay(transform.position, transform.forward);
         }
     }
 }

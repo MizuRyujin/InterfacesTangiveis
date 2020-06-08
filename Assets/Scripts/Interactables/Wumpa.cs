@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 namespace Scripts
@@ -9,9 +8,10 @@ namespace Scripts
     /// </summary>
     public class Wumpa : MonoBehaviour, IInteractable
     {
-        [SerializeField] private float respawnTime = 5f;
-        [SerializeField] private ParticleSystem _particlesIdle;
-        [SerializeField] private ParticleSystem _particleInteract;
+        [SerializeField] private float _respawnTime = 5f;
+        [SerializeField] private float _staminaGainAmount = default;
+        [SerializeField] private ParticleSystem _particlesIdle = default;
+        [SerializeField] private ParticleSystem _particleInteract = default;
 
         private MeshRenderer _mesh;
         private CapsuleCollider _collider;
@@ -24,7 +24,7 @@ namespace Scripts
         {
             _mesh = gameObject.GetComponent<MeshRenderer>();
             _collider = gameObject.GetComponent<CapsuleCollider>();
-            _respawnTimer = new WaitForSeconds(respawnTime);
+            _respawnTimer = new WaitForSeconds(_respawnTime);
         }
 
         /// <summary>
@@ -33,6 +33,7 @@ namespace Scripts
         public void Interact()
         {
             _particleInteract.Play();
+            
             Despawn();
         }
 
@@ -44,8 +45,9 @@ namespace Scripts
         {
             if (collider.gameObject.TryGetComponent(out Player player))
             {
-                player.AddStamina();
+                player.StaminaScript.StaminaChange(_staminaGainAmount);
             }
+
             Interact();
         }
 
