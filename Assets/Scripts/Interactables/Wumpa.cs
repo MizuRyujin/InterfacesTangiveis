@@ -45,7 +45,7 @@ namespace Scripts
         {
             if (collider.gameObject.TryGetComponent(out Player player))
             {
-                player.StaminaScript.StaminaChange(_staminaGainAmount);
+                player.StaminaScript.OnChange(_staminaGainAmount);
             }
 
             Interact();

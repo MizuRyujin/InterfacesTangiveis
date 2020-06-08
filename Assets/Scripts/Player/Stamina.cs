@@ -31,7 +31,8 @@ namespace Scripts
         public float CurrStamina => _stamina;
 
         /// <summary>
-        /// Event of the type Action(float) to be used when stamina value changes
+        /// Event of the type Action(float) to be used when stamina value changes.
+        /// Source of "information" for stamina value observers
         /// </summary>
         public event Action<float> OnStaminaChange;
 
@@ -82,9 +83,10 @@ namespace Scripts
         }
 
         /// <summary>
-        /// Activated on wumpa catch, adds stamina
+        /// Method to add or decrease the stamina values
         /// </summary>
-        public void StaminaChange(float amount)
+        /// <param name="amount">The amount of stamina to be changed </param>
+        private void StaminaChange(float amount)
         {
             _stamina += amount;
 
@@ -93,6 +95,16 @@ namespace Scripts
             float staminaPct = _stamina / _maxStamina;
 
             OnStaminaChange(staminaPct);
+        }
+
+        /// <summary>
+        /// Public method responsible to call method(s) required to change 
+        /// stamina values
+        /// </summary>
+        /// <param name="amount">The amount of stamina to be changed </param>
+        public void OnChange(float amount)
+        {
+            StaminaChange(amount);
         }
     }
 }
