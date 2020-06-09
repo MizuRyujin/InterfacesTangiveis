@@ -5191,16 +5191,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1861390918}
     m_Modifications:
-    - target: {fileID: 4380259722344508034, guid: e046b92f20873a846bc564d732771dac,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-    - target: {fileID: 4380259722344508034, guid: e046b92f20873a846bc564d732771dac,
-        type: 3}
-      propertyPath: m_Type
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4380259722344508061, guid: e046b92f20873a846bc564d732771dac,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -5264,7 +5254,7 @@ PrefabInstance:
     - target: {fileID: 4380259722617696650, guid: e046b92f20873a846bc564d732771dac,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4380259722617696650, guid: e046b92f20873a846bc564d732771dac,
         type: 3}
