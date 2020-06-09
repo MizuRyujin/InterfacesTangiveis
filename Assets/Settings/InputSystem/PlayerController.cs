@@ -33,6 +33,22 @@ public class @PlayerController : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""RestartScene"",
+                    ""type"": ""Button"",
+                    ""id"": ""c284b394-67d3-40dd-9495-ab45988e8382"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""QuitGame"",
+                    ""type"": ""Button"",
+                    ""id"": ""94679b71-c605-4de3-b647-9976ad649554"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -123,6 +139,28 @@ public class @PlayerController : IInputActionCollection, IDisposable
                     ""action"": ""MovementControl"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a1319c5d-22b9-453e-bf0a-515dce4d261b"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""RestartScene"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f135dc86-cf96-4e6d-9bd2-03bfb1d9d2c5"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""QuitGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -144,6 +182,8 @@ public class @PlayerController : IInputActionCollection, IDisposable
         m_FlightActions = asset.FindActionMap("FlightActions", throwIfNotFound: true);
         m_FlightActions_MovementControl = m_FlightActions.FindAction("MovementControl", throwIfNotFound: true);
         m_FlightActions_LiftOff = m_FlightActions.FindAction("LiftOff", throwIfNotFound: true);
+        m_FlightActions_RestartScene = m_FlightActions.FindAction("RestartScene", throwIfNotFound: true);
+        m_FlightActions_QuitGame = m_FlightActions.FindAction("QuitGame", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -195,12 +235,16 @@ public class @PlayerController : IInputActionCollection, IDisposable
     private IFlightActionsActions m_FlightActionsActionsCallbackInterface;
     private readonly InputAction m_FlightActions_MovementControl;
     private readonly InputAction m_FlightActions_LiftOff;
+    private readonly InputAction m_FlightActions_RestartScene;
+    private readonly InputAction m_FlightActions_QuitGame;
     public struct FlightActionsActions
     {
         private @PlayerController m_Wrapper;
         public FlightActionsActions(@PlayerController wrapper) { m_Wrapper = wrapper; }
         public InputAction @MovementControl => m_Wrapper.m_FlightActions_MovementControl;
         public InputAction @LiftOff => m_Wrapper.m_FlightActions_LiftOff;
+        public InputAction @RestartScene => m_Wrapper.m_FlightActions_RestartScene;
+        public InputAction @QuitGame => m_Wrapper.m_FlightActions_QuitGame;
         public InputActionMap Get() { return m_Wrapper.m_FlightActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -216,6 +260,12 @@ public class @PlayerController : IInputActionCollection, IDisposable
                 @LiftOff.started -= m_Wrapper.m_FlightActionsActionsCallbackInterface.OnLiftOff;
                 @LiftOff.performed -= m_Wrapper.m_FlightActionsActionsCallbackInterface.OnLiftOff;
                 @LiftOff.canceled -= m_Wrapper.m_FlightActionsActionsCallbackInterface.OnLiftOff;
+                @RestartScene.started -= m_Wrapper.m_FlightActionsActionsCallbackInterface.OnRestartScene;
+                @RestartScene.performed -= m_Wrapper.m_FlightActionsActionsCallbackInterface.OnRestartScene;
+                @RestartScene.canceled -= m_Wrapper.m_FlightActionsActionsCallbackInterface.OnRestartScene;
+                @QuitGame.started -= m_Wrapper.m_FlightActionsActionsCallbackInterface.OnQuitGame;
+                @QuitGame.performed -= m_Wrapper.m_FlightActionsActionsCallbackInterface.OnQuitGame;
+                @QuitGame.canceled -= m_Wrapper.m_FlightActionsActionsCallbackInterface.OnQuitGame;
             }
             m_Wrapper.m_FlightActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -226,6 +276,12 @@ public class @PlayerController : IInputActionCollection, IDisposable
                 @LiftOff.started += instance.OnLiftOff;
                 @LiftOff.performed += instance.OnLiftOff;
                 @LiftOff.canceled += instance.OnLiftOff;
+                @RestartScene.started += instance.OnRestartScene;
+                @RestartScene.performed += instance.OnRestartScene;
+                @RestartScene.canceled += instance.OnRestartScene;
+                @QuitGame.started += instance.OnQuitGame;
+                @QuitGame.performed += instance.OnQuitGame;
+                @QuitGame.canceled += instance.OnQuitGame;
             }
         }
     }
@@ -252,5 +308,7 @@ public class @PlayerController : IInputActionCollection, IDisposable
     {
         void OnMovementControl(InputAction.CallbackContext context);
         void OnLiftOff(InputAction.CallbackContext context);
+        void OnRestartScene(InputAction.CallbackContext context);
+        void OnQuitGame(InputAction.CallbackContext context);
     }
 }
