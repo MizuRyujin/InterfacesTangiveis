@@ -6,8 +6,10 @@ namespace Scripts
     public class Player : MonoBehaviour
     {
         //* DEV VARIABLES
+        /// <summary>
+        /// Variable to enable dev tools
+        /// </summary>
         [SerializeField] private bool _devMode = default;
-        //*
 
         //* Class variables
         /// <summary>
@@ -15,13 +17,15 @@ namespace Scripts
         /// </summary>
         [SerializeField] private PlayerValues _values = default;
 
-
         /// <summary>
         /// Reference to player game object Rigidbody reference
         /// </summary>
         private Rigidbody _rb = default;
 
         //* Movement Strategy variables
+        /// <summary>
+        /// Reference to to stamina script
+        /// </summary>
         private Stamina _staminaScript;
 
         /// <summary>
@@ -100,6 +104,10 @@ namespace Scripts
         /// </summary>
         public Action Action;
 
+        /// <summary>
+        /// Property to have the value of the bool and inform other scripts if
+        /// dev tools are to be used
+        /// </summary>
         public bool DevMode => _devMode;
 
 
@@ -173,7 +181,7 @@ namespace Scripts
             if (_flying)
             {
                 if (Physics.Raycast(transform.position,
-                        transform.forward, 2f, LayerMask.GetMask("Ground")))
+                        transform.forward, 4f, LayerMask.GetMask("Ground")))
                 {
                     ChangeMovement();
                 }
