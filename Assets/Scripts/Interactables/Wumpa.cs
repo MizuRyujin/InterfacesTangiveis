@@ -60,6 +60,8 @@ namespace Scripts
             _mesh.enabled = false;
             _particlesIdle.gameObject.SetActive(false);
 
+            // PLAY SOUND
+
             StartCoroutine(TimerRespawn());
         }
 
