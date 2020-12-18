@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace Scripts
 {
@@ -12,6 +13,7 @@ namespace Scripts
         [SerializeField] private float _staminaGainAmount = default;
         [SerializeField] private ParticleSystem _particlesIdle = default;
         [SerializeField] private ParticleSystem _particleInteract = default;
+        [SerializeField] private AudioSource _source;
 
         private MeshRenderer _mesh;
         private CapsuleCollider _collider;
@@ -60,7 +62,7 @@ namespace Scripts
             _mesh.enabled = false;
             _particlesIdle.gameObject.SetActive(false);
 
-            // PLAY SOUND
+            _source.Play();
 
             StartCoroutine(TimerRespawn());
         }
