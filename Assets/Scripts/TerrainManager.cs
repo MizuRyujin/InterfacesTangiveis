@@ -6,7 +6,6 @@ public class TerrainManager : MonoBehaviour
 {
     private Terrain terrain;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -23,8 +22,8 @@ public class TerrainManager : MonoBehaviour
 
         float[,] heightData = new float[width, height];
 
-        int thing = ((int)transform.position.x / 1000) * width * 2;
-        int thing2 = ((int)transform.position.z / 1000) * height * 2;
+        int thing = ((int)transform.position.x / 1000) * (width -1) * 2;
+        int thing2 = ((int)transform.position.z / 1000) * (height-1) * 2;
 
         for (int i = 0; i < 4; i++)
         {
@@ -69,7 +68,8 @@ public class TerrainManager : MonoBehaviour
 
                 // Steepness is given as an angle, 0..90 degrees. Divide
                 // by 90 to get an alpha blending value in the range 0..1.
-                float frac = angle / 90.0f;
+                float frac = angle / 80.0f;
+
                 map[x, y, 0] = frac;
                 map[x, y, 1] = 1 - frac;
 
@@ -79,7 +79,43 @@ public class TerrainManager : MonoBehaviour
                 }
             }
         }
-
         terrain.terrainData.SetAlphamaps(0, 0, map);
+        terrain.terrainData.SetTreeInstances(terrain.terrainData.treeInstances, true);
+
+        // Get all of layer zero.
+        var grassMap = terrain.terrainData.GetDetailLayer(0, 0, terrain.terrainData.detailWidth, terrain.terrainData.detailHeight, 0);
+
+        // For each pixel in the detail map...
+        for (int y = 0; y < terrain.terrainData.detailHeight; y++)
+        {
+            for (int x = 0; x < terrain.terrainData.detailWidth; x++)
+            {
+                // Get the normalized terrain coordinate that
+                // corresponds to the the point.
+                float normX = (float)(x * 0.5f / ((terrain.terrainData.alphamapWidth) - 1));
+                float normY = (float)(y * 0.5f / ((terrain.terrainData.alphamapHeight) - 1));
+
+                // Get the steepness value at the normalized coordinate.
+                float angle = terrain.terrainData.GetSteepness(normX, normY);
+
+                // Steepness is given as an angle, 0..90 degrees. Divide
+                // by 90 to get an alpha blending value in the range 0..1.
+                float frac = angle / 90.0f;
+
+                grassMap[x, y] = 20;
+
+                // If the pixel value is below the threshold then
+                // set it to zero.
+                if (frac < 0.45f || heightData[x/2,y/2] <= 0.22f)
+                {
+                    grassMap[x, y] = 0;
+
+                }
+            }
+        }
+
+        // Assign the modified map back.
+        terrain.terrainData.SetDetailLayer(0, 0, 0, grassMap);
+
     }
 }
