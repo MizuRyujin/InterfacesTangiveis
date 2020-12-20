@@ -4,14 +4,10 @@ using UnityEngine;
 
 public class TerrainManager : MonoBehaviour
 {
-    private Terrain terrain;
+    public Terrain terrain;
+    public int xOffest;
+    public int yOffset;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        terrain = GetComponent<Terrain>();
-        GenerateTerrain();
-    }
     public void GenerateTerrain()
     {
         int width = 513;
@@ -31,13 +27,13 @@ public class TerrainManager : MonoBehaviour
             {
                 for (int y = 0; y < height * 2; y += 2)
                 {
-                    int nY = y + thing;
-                    int nX = x + thing2;
+                    int nY = y + thing ;
+                    int nX = x + thing2 ;
 
                     float xx = ((startF * nX / width) + 1);
                     float yy = ((startF * nY / height) + 1);
 
-                    float data = Mathf.PerlinNoise(xx, yy);
+                    float data = Mathf.PerlinNoise(xx + xOffest, yy + yOffset);
 
                     int dX = x == 0 ? x : x / 2;
                     int dY = y == 0 ? y : y / 2;

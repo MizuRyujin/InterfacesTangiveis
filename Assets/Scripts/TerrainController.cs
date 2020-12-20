@@ -15,9 +15,33 @@ public class TerrainController : MonoBehaviour
         Terrain[] ts = GameObject.FindObjectsOfType<Terrain>();
         terrains = new TerrainManager[ts.Length];
 
+        int randX = Random.Range(0, 10000);
+        int randY = Random.Range(0, 10000);
+        Color c;
+
+        int rnd = Random.Range(0, 3);
+
+        if (rnd == 0)
+        {
+            c = new Color(11, 135, 0);
+        }
+        else if(rnd == 1)
+        {
+
+            c = new Color(135, 66, 0);
+        }
+        else
+        {
+            c = new Color(200, 32, 0);
+        }
         for (int i = 0; i < ts.Length; i++)
         {
             terrains[i] = ts[i].GetComponent<TerrainManager>();
+            terrains[i].terrain = terrains[i].GetComponent<Terrain>();
+            terrains[i].xOffest = randX;
+            terrains[i].yOffset = randY;
+            terrains[i].terrain.terrainData.terrainLayers[0].specular = c;
+            terrains[i].GenerateTerrain();
         }
     }
 
