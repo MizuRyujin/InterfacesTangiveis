@@ -110,6 +110,9 @@ namespace Scripts
         /// </summary>
         public bool DevMode => _devMode;
 
+        public Vector3 MaxHeight => new Vector3(transform.position.x,
+                                                650.0f,
+                                                transform.position.z);
 
 
         /// <summary>
@@ -134,6 +137,15 @@ namespace Scripts
             _playerController.FlightActions.MovementControl.performed += ctx => _movementInput = ctx.ReadValue<Vector2>();
             _playerController.FlightActions.LiftOff.performed += ctx => ChangeMovement();
 
+        }
+
+        /// <summary>
+        /// Update is called every frame, if the MonoBehaviour is enabled.
+        /// </summary>
+        void Update()
+        {
+            // transform.position = transform.position.y > MaxHeight.y ? MaxHeight : transform.position;
+            // transform.rotation = transform.position.y > MaxHeight.y - 10f ? Quaternion.identity : transform.rotation;
         }
 
         /// <summary>
