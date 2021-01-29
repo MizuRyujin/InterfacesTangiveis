@@ -34,6 +34,12 @@ namespace Scripts
             Application.Quit();
         }
 
+        public void HideCursor()
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+
         /// <summary>
         /// This function is called when the object becomes enabled and active.
         /// </summary>
