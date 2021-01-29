@@ -25,7 +25,7 @@ namespace Scripts
         {
             if (player.MovementInput != Vector2.zero)
             {
-                _movement.z = player.MovementInput.y *
+                _movement.z = -player.MovementInput.y *
                     player.Values.WalkSpeed * Time.deltaTime;
             }
             else
