@@ -122,7 +122,14 @@ namespace Scripts
             {
                 Collider[] col = Physics.OverlapSphere(transform.position,
                                                 1f, LayerMask.GetMask("Ground"));
-                return col != null;
+                if (col.Length != 0)
+                {
+                    return col[0] != null;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 
@@ -173,17 +180,16 @@ namespace Scripts
             print(IsGrounded);
             if (!IsGrounded)
             {
-                if (_auxBlendValue <= 0.0f) return;
-                _auxBlendValue -= 0.2f * Time.deltaTime;
+                if (_auxBlendValue < 0.1f) return;
+                _auxBlendValue -= 0.35f * Time.deltaTime;
                 _animator.SetFloat("Blend", _auxBlendValue);
             }
             else
             {
-                if (_auxBlendValue >= 0.97f) return;
-                _auxBlendValue += 0.2f * Time.deltaTime;
+                if (_auxBlendValue > 0.97f) return;
+                _auxBlendValue += 0.35f * Time.deltaTime;
                 _animator.SetFloat("Blend", _auxBlendValue);
             }
-            print(_auxBlendValue);
         }
 
         /// <summary>
