@@ -65,6 +65,7 @@ namespace Scripts
         private bool _flying;
 
         private Animator _animator;
+        private float _auxBlendValue = default;
 
 
         //* Class properties
@@ -115,6 +116,22 @@ namespace Scripts
         public Vector3 MaxHeight => new Vector3(transform.position.x,
                                                 650.0f,
                                                 transform.position.z);
+        public bool IsGrounded
+        {
+            get
+            {
+                Collider[] col = Physics.OverlapSphere(transform.position,
+                                                1f, LayerMask.GetMask("Ground"));
+                if (col.Length != 0)
+                {
+                    return col[0] != null;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
 
 
         /// <summary>
@@ -124,6 +141,7 @@ namespace Scripts
         {
             _rb = GetComponent<Rigidbody>();
             _animator = GetComponent<Animator>();
+            _auxBlendValue = 0.0f;
 
             _staminaScript = GetComponent<Stamina>();
 
@@ -139,17 +157,14 @@ namespace Scripts
             _playerController = new PlayerController();
             _playerController.FlightActions.MovementControl.performed += ctx => _movementInput = ctx.ReadValue<Vector2>();
             _playerController.FlightActions.LiftOff.performed += ctx => ChangeMovement();
-            // _playerController.UI.Navigate.performed += ctx => _movementInput = ctx.ReadValue<Vector2>();S
 
         }
-
         /// <summary>
         /// Update is called every frame, if the MonoBehaviour is enabled.
         /// </summary>
-        void Update()
+        private void Update()
         {
-            // transform.position = transform.position.y > MaxHeight.y ? MaxHeight : transform.position;
-            // transform.rotation = transform.position.y > MaxHeight.y - 10f ? Quaternion.identity : transform.rotation;
+            AnimationBlend();
         }
 
         /// <summary>
@@ -159,6 +174,22 @@ namespace Scripts
         {
             _currMovement.Movement(this);
             CheckCollisionGround();
+        }
+        private void AnimationBlend()
+        {
+            print(IsGrounded);
+            if (!IsGrounded)
+            {
+                if (_auxBlendValue < 0.1f) return;
+                _auxBlendValue -= 0.35f * Time.deltaTime;
+                _animator.SetFloat("Blend", _auxBlendValue);
+            }
+            else
+            {
+                if (_auxBlendValue > 0.97f) return;
+                _auxBlendValue += 0.35f * Time.deltaTime;
+                _animator.SetFloat("Blend", _auxBlendValue);
+            }
         }
 
         /// <summary>
@@ -171,7 +202,6 @@ namespace Scripts
 
             if (_flying)
             {
-                _animator.SetTrigger("Fly");
                 auxRotation = _currMovement.Rotation;
                 auxRotation.x = -20.0f;
                 _currMovement = _flightMovement;
@@ -180,7 +210,6 @@ namespace Scripts
             }
             else
             {
-                _animator.SetTrigger("Idle");
                 auxRotation = _currMovement.Rotation;
                 auxRotation.x = 0.0f;
                 _currMovement = _walkMovement;
