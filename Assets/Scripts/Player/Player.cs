@@ -64,6 +64,8 @@ namespace Scripts
         /// </summary>
         private bool _flying;
 
+        private Animator _animator;
+
 
         //* Class properties
         /// <summary>
@@ -121,6 +123,7 @@ namespace Scripts
         private void Awake()
         {
             _rb = GetComponent<Rigidbody>();
+            _animator = GetComponent<Animator>();
 
             _staminaScript = GetComponent<Stamina>();
 
@@ -136,6 +139,7 @@ namespace Scripts
             _playerController = new PlayerController();
             _playerController.FlightActions.MovementControl.performed += ctx => _movementInput = ctx.ReadValue<Vector2>();
             _playerController.FlightActions.LiftOff.performed += ctx => ChangeMovement();
+            // _playerController.UI.Navigate.performed += ctx => _movementInput = ctx.ReadValue<Vector2>();S
 
         }
 
@@ -167,6 +171,7 @@ namespace Scripts
 
             if (_flying)
             {
+                _animator.SetTrigger("Fly");
                 auxRotation = _currMovement.Rotation;
                 auxRotation.x = -20.0f;
                 _currMovement = _flightMovement;
@@ -175,6 +180,7 @@ namespace Scripts
             }
             else
             {
+                _animator.SetTrigger("Idle");
                 auxRotation = _currMovement.Rotation;
                 auxRotation.x = 0.0f;
                 _currMovement = _walkMovement;

@@ -13,8 +13,8 @@ public class TerrainManager : MonoBehaviour
         int width = 513;
         int height = 513;
 
-        float startF = 1;
-        float startA = 1;
+        float startF = 1.5f;
+        float startA = 0.3f;
 
         float[,] heightData = new float[width, height];
 
@@ -38,7 +38,7 @@ public class TerrainManager : MonoBehaviour
                     int dX = x == 0 ? x : x / 2;
                     int dY = y == 0 ? y : y / 2;
 
-                    heightData[dX, dY] += (data * startA) - 0.2f;
+                    heightData[dX, dY] += (data * startA);
                 }
             }
             startF *= 2f;

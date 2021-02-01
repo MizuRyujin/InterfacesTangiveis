@@ -24,12 +24,14 @@ namespace Scripts
         private void ResetScene()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
 
         /// <summary>
         /// Method to exit the game
         /// </summary>
-        private void ExitGame()
+        public void ExitGame()
         {
             Application.Quit();
         }
