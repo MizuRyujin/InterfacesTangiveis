@@ -24,6 +24,8 @@ namespace Scripts
         private void ResetScene()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
 
         /// <summary>

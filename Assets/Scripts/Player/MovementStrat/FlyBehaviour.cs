@@ -32,7 +32,7 @@ namespace Scripts
             if (player.MovementInput != Vector2.zero)
             {
                 _rotation += new Vector3(
-                    player.MovementInput.y, player.MovementInput.x, 0.0f) *
+                    -player.MovementInput.y, player.MovementInput.x, 0.0f) *
                     player.Values.RotateSpeed * Time.deltaTime;
 
                 if (!player.DevMode)
@@ -96,11 +96,11 @@ namespace Scripts
             }
             if (player.MovementInput != Vector2.zero && (_movement.x != -60.0f && _movement.x != 60.0f))
             {
-                if (player.MovementInput.y > 0.0f)
+                if (player.MovementInput.y < 0.0f)
                 {
                     ModelRotAnim(player, 35f);
                 }
-                if (player.MovementInput.y < 0.0f)
+                if (player.MovementInput.y > 0.0f)
                 {
                     ModelRotAnim(player, -35f);
                 }
