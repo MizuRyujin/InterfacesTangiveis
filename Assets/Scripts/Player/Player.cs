@@ -139,6 +139,7 @@ namespace Scripts
             _playerController = new PlayerController();
             _playerController.FlightActions.MovementControl.performed += ctx => _movementInput = ctx.ReadValue<Vector2>();
             _playerController.FlightActions.LiftOff.performed += ctx => ChangeMovement();
+            // _playerController.UI.Navigate.performed += ctx => _movementInput = ctx.ReadValue<Vector2>();S
 
         }
 

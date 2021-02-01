@@ -31,7 +31,7 @@ namespace Scripts
         /// <summary>
         /// Method to exit the game
         /// </summary>
-        private void ExitGame()
+        public void ExitGame()
         {
             Application.Quit();
         }
