@@ -64,6 +64,9 @@ namespace Scripts
         /// </summary>
         private bool _flying;
 
+        private Animator _animator;
+        private float _auxBlendValue = default;
+
 
         //* Class properties
         /// <summary>
@@ -113,6 +116,22 @@ namespace Scripts
         public Vector3 MaxHeight => new Vector3(transform.position.x,
                                                 650.0f,
                                                 transform.position.z);
+        public bool IsGrounded
+        {
+            get
+            {
+                Collider[] col = Physics.OverlapSphere(transform.position,
+                                                1f, LayerMask.GetMask("Ground"));
+                if (col.Length != 0)
+                {
+                    return col[0] != null;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
 
 
         /// <summary>
@@ -121,6 +140,8 @@ namespace Scripts
         private void Awake()
         {
             _rb = GetComponent<Rigidbody>();
+            _animator = GetComponent<Animator>();
+            _auxBlendValue = 0.0f;
 
             _staminaScript = GetComponent<Stamina>();
 
@@ -138,14 +159,12 @@ namespace Scripts
             _playerController.FlightActions.LiftOff.performed += ctx => ChangeMovement();
 
         }
-
         /// <summary>
         /// Update is called every frame, if the MonoBehaviour is enabled.
         /// </summary>
-        void Update()
+        private void Update()
         {
-            // transform.position = transform.position.y > MaxHeight.y ? MaxHeight : transform.position;
-            // transform.rotation = transform.position.y > MaxHeight.y - 10f ? Quaternion.identity : transform.rotation;
+            AnimationBlend();
         }
 
         /// <summary>
@@ -155,6 +174,22 @@ namespace Scripts
         {
             _currMovement.Movement(this);
             CheckCollisionGround();
+        }
+        private void AnimationBlend()
+        {
+            print(IsGrounded);
+            if (!IsGrounded)
+            {
+                if (_auxBlendValue < 0.1f) return;
+                _auxBlendValue -= 0.35f * Time.deltaTime;
+                _animator.SetFloat("Blend", _auxBlendValue);
+            }
+            else
+            {
+                if (_auxBlendValue > 0.97f) return;
+                _auxBlendValue += 0.35f * Time.deltaTime;
+                _animator.SetFloat("Blend", _auxBlendValue);
+            }
         }
 
         /// <summary>
