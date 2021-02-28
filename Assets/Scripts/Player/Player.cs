@@ -186,7 +186,7 @@ namespace Scripts
             }
             else
             {
-                if (_auxBlendValue > 0.97f) return;
+                if (_auxBlendValue > 0.99f) return;
                 _auxBlendValue += 0.35f * Time.deltaTime;
                 _animator.SetFloat("Blend", _auxBlendValue);
             }
